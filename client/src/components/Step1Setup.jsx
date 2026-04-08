@@ -109,7 +109,7 @@ function Step1Setup({onStart}) {
                         className='w-full py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 outline-none transition'>
 
                             <option value="Technical">Technical Interview</option>
-                            <option value="HR">HR Interview</option>
+                            <option value="HR">HR Interview platform</option>
 
                         </select>
                 </div>
