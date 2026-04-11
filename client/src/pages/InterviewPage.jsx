@@ -11,7 +11,7 @@ function InterviewPage() {
     const [interviewData,setInterviewData] =useState(null)
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gradient-to-br from-cyan-100 via-sky-50 to-indigo-100'>
         {step===1 &&(
             <Step1Setup onStart={(data)=>{
                 setInterviewData(data);
