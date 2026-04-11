@@ -1,34 +1,35 @@
-import React from 'react'
-import { useState } from 'react'
-import Step2Interview from '../components/Step2Interview'
-import Step3Report from '../components/Step3Report'
-import Step1Setup from '../components/Step1Setup'
-
-
+import React from "react";
+import { useState } from "react";
+import Step2Interview from "../components/Step2Interview";
+import Step3Report from "../components/Step3Report";
+import Step1Setup from "../components/Step1Setup";
 
 function InterviewPage() {
-    const [step,setStep] = useState(1)
-    const [interviewData,setInterviewData] =useState(null)
+  const [step, setStep] = useState(1);
+  const [interviewData, setInterviewData] = useState(null);
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-cyan-100 via-sky-50 to-indigo-100'>
-        {step===1 &&(
-            <Step1Setup onStart={(data)=>{
-                setInterviewData(data);
-            setStep(2)}} />
-        )}
-        {step===2 &&(
-            <Step2Interview interviewData={interviewData}
-            onFinish={(report)=>{setInterviewData(report);
-                setStep(2)
-            }} />
-        )}
-        {step===3 &&(
-            <Step3Report report={interviewData} />
-        )}
-      
+    <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-sky-50 to-indigo-100">
+      {step === 1 && (
+        <Step1Setup
+          onStart={(data) => {
+            setInterviewData(data);
+            setStep(2);
+          }}
+        />
+      )}
+      {step === 2 && (
+        <Step2Interview
+          interviewData={interviewData}
+          onFinish={(report) => {
+            setInterviewData(report);
+            setStep(2);
+          }}
+        />
+      )}
+      {step === 3 && <Step3Report report={interviewData} />}
     </div>
-  )
+  );
 }
 
-export default InterviewPage
+export default InterviewPage;
