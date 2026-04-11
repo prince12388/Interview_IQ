@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const askAi = async (messages) => {
+   
   try {
     if (!messages || !Array.isArray(messages) || messages.length ===  0) 
     {
-      throw new Error("Messages array is empty.");
+     throw new Error("Messages array is empty.");  
     }
 
     const response = await axios.post(

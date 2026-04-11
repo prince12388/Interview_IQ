@@ -4,16 +4,20 @@ import { askAi } from "../services/openRouter.services.js";
 
 export const analyzeResume = async(req, res) => {
     try {
+        if (!req.userId) {
+            return res.status(401).json({ message: "Authentication required" });
+        }
         if (!req.file) {
             return res.status(400).json({ message: "Resume required" });
         }
 
-        const filepath = req.file.filepath; // or .path depending on middleware
+        const filepath = req.file.path
 
-        const fileBuffer = await fs.promises.readFile(filepath);
-        const uint8Array = new Uint8Array(fileBuffer);
+        const fileBuffer = await fs.promises.readFile(filepath)
+        const uint8Array = new Uint8Array(fileBuffer)
 
-        const pdf = await pdfjsLib.getDocument({ data: uint8Array }).promise;
+        const pdf = await pdfjsLib.getDocument({data:uint8Array}).
+        promise;
 
         let resumeText = "";
 
@@ -26,9 +30,12 @@ export const analyzeResume = async(req, res) => {
             resumeText += pageText + "\n";
         }
 
-        resumeText = resumeText.replace(/\s+/g, " ").trim();
+        resumeText = resumeText
+        .replace(/\s+/g, " ")
+        .trim();
 
-        const messages = [{
+        const messages = [
+            {
                 role: "system",
                 content: `Extract structured data from resume.
 
