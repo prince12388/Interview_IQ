@@ -174,6 +174,46 @@ function Step1Setup({onStart}) {
                             </motion.div>
                         )}
 
+                        {analysisDone && (
+                            <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                             className='bg-gray-50 border border-gray-200 rounded-xl p-5 space-y-4'>
+                                <h3 className='text-lg font-semibold text-gray-800'>
+                                    Resume Analysis Result</h3>
+
+                                    {projects.length >0 &&(
+                                        <div>
+                                    <p className='font-medium text-gray-700 mb-1'>
+                                        Projects:</p>
+
+                                        <ul className='list-disc list-inside text-gray-600 space-y-1'>
+                                            {projects.map((p,i)=>(
+                                                <li key={i}>{p}</li>
+                                            ))}
+                                        </ul>
+                                        </div>
+
+                                    )}
+
+                                    {skills.length >0 &&(
+                                        <div>
+                                    <p className='font-medium text-gray-700 mb-1'>
+                                        Skills:</p>
+
+                                        <div className='flex flex-wrap gap-2'>
+                                            {skills.map((s,i)=>(
+                                                <span key={i} className='bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm'>{s}</span>
+                                            ))}
+                                        </div>
+                                        </div>
+
+                                    )}
+
+                            </motion.div>
+                        )}
+
+
                         <motion.button
                         disabled={!role || !experience}
                         whileHover={{ scale: 1.03 }}
