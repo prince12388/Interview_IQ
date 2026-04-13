@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import {
+<<<<<<< HEAD
   FaUserTie,
   FaBriefcase,
   FaFileUpload,
@@ -21,6 +22,34 @@ function Step1Setup({ onStart }) {
   const [resumeText, setResumeText] = useState("");
   const [analysisDone, setAnalysisDone] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
+=======
+    FaUserTie,
+    FaBriefcase,
+    FaFileUpload,
+    FaMicrophoneAlt,
+    FaChartLine,
+} from "react-icons/fa"
+import axios from 'axios'
+import { ServerURL } from '../App';
+import { useSelector, useDispatch } from 'react-redux'
+import { setUserData } from '../redux/userSlice';
+
+
+
+function Step1Setup({onStart}) {
+    const {userData} = useSelector((state)=>state.user)
+    const dispatch = useDispatch()
+    const [role, setRole] = useState("");
+    const [experience, setExperience] = useState("");
+    const [mode, setMode] = useState("Technical");
+    const [resumeFile, setResumeFile] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [projects, setProjects] = useState([]);
+    const [skills, setSkills] = useState([]);
+    const [resumeText, setResumeText] = useState("");
+    const [analysisDone, setAnalysisDone] = useState(false);
+    const [analyzing, setAnalyzing] = useState(false);
+>>>>>>> f3223d96a23bcb92b2399b6ca70eb4be4a1f3b4e
 
   const handleUploadResume = async () => {
     if (!resumeFile || analyzing) return;
@@ -49,7 +78,33 @@ function Step1Setup({ onStart }) {
       console.log(error);
       setAnalyzing(false);
     }
+<<<<<<< HEAD
   };
+=======
+
+
+    const handleStart = async () => {
+        setLoading(true)
+        try{
+            const result = await axios.post(ServerURL + "/api/interview/generate-questions" ,
+                {role, experience, mode, resumeText, projects, skills }, {withCredentials:true})
+                console.log(result.data)
+                if(userData){
+                    dispatch(setUserData({...userData , credits:result.data.creditsLeft}))
+                }
+                setLoading(false)
+                onStart(result.data)
+            
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+
+        }
+    }
+
+
+
+>>>>>>> f3223d96a23bcb92b2399b6ca70eb4be4a1f3b4e
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -311,11 +366,12 @@ function Step1Setup({ onStart }) {
 
 
                         <motion.button
-                        disabled={!role || !experience}
+                        onClick={handleStart}
+                        disabled={!role || !experience || loading}
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.95 }}
                          className='w-full disabled:bg-gray-600 bg-green-600 hover:bg-green-700 text-white py-3 rounded-full text-lg font-semibold transition duration-300 shadow-md'>
-                            Start Interview
+                            {loading ? "Starting...":"Start Interview"}
 
                         </motion.button>
                 </div>
