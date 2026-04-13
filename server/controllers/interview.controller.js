@@ -214,11 +214,9 @@ export const generateQuestion = async (req, res) => {
         userName: user.name,
         questions: interview.questions
     });
-
-
     } catch (error){
-      console.error("Generate Question Error:", error.message);
-      return res.status(500).json({message: error.message || "Failed to create interview"})
+      return res.status(500).json({message:`failed to create interview ${error}
+        `})
     }
 }
 

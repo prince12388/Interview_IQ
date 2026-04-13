@@ -8,7 +8,7 @@ import Step1Setup from '../components/Step1Setup'
 
 function InterviewPage() {
     const [step,setStep] = useState(1)
-    const [interviewData,setInterviewData] =useState(null)
+    const [interviewData,setInterviewData] = useState(null)
 
   return (
     <div className='min-h-screen bg-gray-50'>
