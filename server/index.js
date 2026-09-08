@@ -14,7 +14,14 @@ import paymentRouter from './routes/payment.route.js'
 
 const app = express()
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+        const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"]
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, origin)
+        } else {
+            callback(new Error("Origin not allowed by CORS"))
+        }
+    },
     credentials: true
 }))
 
