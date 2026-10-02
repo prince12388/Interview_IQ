@@ -4,7 +4,7 @@ import { FaArrowLeft, FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 
-const ServerUrl = import.meta.env.VITE_SERVER_URL || "";
+const ServerUrl = (import.meta.env.VITE_SERVER_URL || "http://localhost:8000").replace(/\/$/, "");
 
 function Pricing() {
   const navigate = useNavigate();
